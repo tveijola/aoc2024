@@ -1,3 +1,4 @@
+from functools import cache
 
 day = "day1"
 
@@ -14,15 +15,15 @@ for line in puzzle_input:
     left_list.append(int(left))
     right_list.append(int(right))
 
-left_list = sorted(left_list)
-right_list = sorted(right_list)
+right_list = tuple(right_list)
 
-# print(left_list)
-# print(right_list)
+@cache
+def similarity(num: int, r: list[int]):
+    count = r.count(num)
+    return num * count
 
 total = 0
-for l, r in zip(left_list, right_list):
-    total += abs(l - r)
+for l in left_list:
+    total += similarity(l, right_list)
 
 print(total)
-    
