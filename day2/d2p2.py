@@ -22,12 +22,9 @@ def desc(report: list[int]):
 def safe(report: list[int], ridx=-1):
     if ridx >= len(report):
         return False
-    if ridx >= 0:
-        mod_report = list(report)
-        mod_report.pop(ridx)
-        return asc(mod_report) or desc(mod_report) or safe(report, ridx+1)
-    else:
-        return asc(report) or desc(report) or safe(report, ridx+1)
+    mod_report = list(report)
+    if ridx >= 0: mod_report.pop(ridx)
+    return asc(mod_report) or desc(mod_report) or safe(report, ridx+1)
 
 total_safe = 0
 for report in reports:
